@@ -44,7 +44,11 @@ function get_kubectl_ctx() {
   fi
 }
 
-PROMPT='$(get_pwd) $(git_prompt_info)%{$reset_color%} 
+function get_host() {
+  echo "%{$FG[117]%}$USER%{$FG[200]%}@%{$FG[117]%}$HOST"
+}
+
+PROMPT='$(get_host) $(get_pwd) $(git_prompt_info)%{$reset_color%} 
 $ret_status '
 
 RPROMPT='$(get_active_vault)$(get_kubectl_ctx)%{$reset_color%}'
