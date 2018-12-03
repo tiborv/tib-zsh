@@ -28,7 +28,9 @@ function mins_to_color() {
 
 function get_active_vault(){
   if [ -n "$VAULTED_ENV" ]; then
-    EXP=$(date -d "$VAULTED_ENV_EXPIRATION" +%s)
+    [[ `uname` == 'Darwin' ]] \
+      && EXP=$(date -ju -f '%FT%TZ' "$VAULTED_ENV_EXPIRATION" +'%s') \
+      || EXP=$(date -d "$VAULTED_ENV_EXPIRATION" +%s)
     NOW=$(date -u +%s)
     DIFF=$((($EXP - $NOW) / 60)) # diff in mins
     COLOR=$(mins_to_color "$DIFF")
