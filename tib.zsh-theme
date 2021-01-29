@@ -24,7 +24,7 @@ function get_pwd(){
 }
 
 function get_k8s_ctx() {
-  local k8s_config="$HOME/.kube/config"
+  local k8s_config=${KUBECONFIG:-"$HOME/.kube/config"}
   if [[ -n "$k8s_config" ]]; then
     k8s_config="$k8s_config"
   fi
